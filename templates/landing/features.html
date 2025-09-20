@@ -1,0 +1,51 @@
+{% extends 'layouts/base_public.html' %}
+{% block title %}Features — SyringeTracker{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <h2>Our Features</h2>
+      <p class="text-muted">Designed to make tracking simple, reliable, and efficient</p>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="d-flex align-items-start">
+          <i class="fas fa-plus-circle fa-2x text-primary me-3"></i>
+          <div>
+            <h5>Add & Manage Inventory</h5>
+            <p>Admins can add new syringes with unique IDs; you can view and manage the entire inventory via dashboard.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="d-flex align-items-start">
+          <i class="fas fa-edit fa-2x text-primary me-3"></i>
+          <div>
+            <h5>Status Updates</h5>
+            <p>Update status easily: available, in use, needs cleaning, retired, etc., with optional patient info.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="d-flex align-items-start">
+          <i class="fas fa-user-check fa-2x text-primary me-3"></i>
+          <div>
+            <h5>User Roles</h5>
+            <p>Separate admin and user roles so that only authorized people make critical updates or add inventory.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="d-flex align-items-start">
+          <i class="fas fa-chart-line fa-2x text-primary me-3"></i>
+          <div>
+            <h5>History Logging</h5>
+            <p>Every status change is logged with timestamp and who made it, so you have audit trail always.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

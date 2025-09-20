@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Syringe Dashboard</h2>
+  <a href="{{ url_for('add_syringe') }}" class="btn btn-success">+ Add Syringe</a>
+</div>
+
+<div class="card shadow">
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead class="table-primary">
+        <tr>
+          <th>ID</th>
+          <th>Syringe ID</th>
+          <th>Status</th>
+          <th>Patient Info</th>
+          <th>Last Updated</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for syringe in syringes %}
+        <tr>
+          <td>{{ syringe.id }}</td>
+          <td><strong>{{ syringe.syringe_id }}</strong></td>
+          <td>
+            {% if syringe.status == "Available" %}
+              <span class="badge bg-success">{{ syringe.status }}</span>
+            {% elif syringe.status == "In Use" %}
+              <span class="badge bg-warning text-dark">{{ syringe.status }}</span>
+            {% else %}
+              <span class="badge bg-danger">{{ syringe.status }}</span>
+            {% endif %}
+          </td>
+          <td>{{ syringe.patient_info or "-" }}</td>
+          <td>{{ syringe.last_updated.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+          <td>
+            <a href="{{ url_for('syringe_detail', id=syringe.id) }}" class="btn btn-sm btn-info">Edit</a>
+            <a href="{{ url_for('syringe_history', id=syringe.id) }}" class="btn btn-sm btn-secondary">History</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="6" class="text-center">No syringes found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

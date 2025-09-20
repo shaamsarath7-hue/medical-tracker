@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow p-4">
+      <h3 class="mb-3">Update Syringe</h3>
+      <form method="POST">
+        <div class="mb-3">
+          <label class="form-label">Syringe ID</label>
+          <input type="text" class="form-control" value="{{ syringe.syringe_id }}" readonly>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Status</label>
+          <select name="status" class="form-select">
+            <option value="Available" {% if syringe.status=="Available" %}selected{% endif %}>Available</option>
+            <option value="In Use" {% if syringe.status=="In Use" %}selected{% endif %}>In Use</option>
+            <option value="Disposed" {% if syringe.status=="Disposed" %}selected{% endif %}>Disposed</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Patient Info</label>
+          <input type="text" name="patient_info" class="form-control" value="{{ syringe.patient_info }}">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Update Syringe</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

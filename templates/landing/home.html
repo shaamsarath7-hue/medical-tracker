@@ -1,0 +1,52 @@
+{% extends 'layouts/base_public.html' %}
+{% block title %}Home — SyringeTracker{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content text-center">
+      <h1 class="display-3">Medical Services That You Can Trust 100%</h1>
+      <p class="lead mt-3">Accurate tracking, status updates, history logs, all in one secure platform.</p>
+      <a href="{{ url_for('login') }}" class="btn btn-lg btn-primary mt-4">Discover SyringeTracker</a>
+    </div>
+  </section>
+
+  <!-- Example of feature / service section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row text-center mb-5">
+        <h2>Our Services</h2>
+        <p class="text-muted">What we provide</p>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <i class="fas fa-syringe fa-2x mb-3 text-primary"></i>
+              <h5 class="card-title">Inventory Management</h5>
+              <p class="card-text">Add, remove, and track syringes easily.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <i class="fas fa-history fa-2x mb-3 text-primary"></i>
+              <h5 class="card-title">History Tracking</h5>
+              <p class="card-text">See every status change, who made it, and when.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <i class="fas fa-user-shield fa-2x mb-3 text-primary"></i>
+              <h5 class="card-title">Role-Based Access</h5>
+              <p class="card-text">Secure admin and user roles for safe operations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

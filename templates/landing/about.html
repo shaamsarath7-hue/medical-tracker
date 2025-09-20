@@ -1,0 +1,57 @@
+{% extends 'layouts/base_public.html' %}
+{% block title %}About Us — SyringeTracker{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h2>Who We Are</h2>
+        <p class="lead text-muted">At SyringeTracker, our mission is to ensure precision, safety, and accountability in medical equipment management. We believe every syringe’s status matters in delivering effective patient care.</p>
+        <p>We started this platform to provide hospitals, clinics, and health professionals with an easy-to-use system to track, update, and monitor syringe usage and history. No more guesswork. Full audit trail. Transparent operations.</p>
+      </div>
+      <div class="col-lg-6">
+        <img src="{{ url_for('static', filename='img/imageone.png') }}" class="img-fluid rounded" alt="About illustration">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-5 bg-light">
+  <div class="container">
+    <div class="row text-center mb-4">
+      <h2>Why Choose Us</h2>
+      <p class="text-muted">What sets SyringeTracker apart</p>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body text-center">
+            <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
+            <h5 class="card-title">Security First</h5>
+            <p class="card-text">We prioritize data security and role-based access to keep your sensitive medical data safe.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body text-center">
+            <i class="fas fa-clock fa-2x text-primary mb-3"></i>
+            <h5 class="card-title">Real-Time Tracking</h5>
+            <p class="card-text">Instant updates when status changes so you always have the latest info.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body text-center">
+            <i class="fas fa-history fa-2x text-primary mb-3"></i>
+            <h5 class="card-title">Full History Logs</h5>
+            <p class="card-text">Every change is stored with timestamp and user so nothing is lost or unnoticed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
