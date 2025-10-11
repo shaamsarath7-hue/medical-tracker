@@ -1,135 +1,435 @@
+/* ========== Base Styles ========== */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  background-color: #fff;
 }
 
-.navbar-brand {
-  font-weight: bold;
+/* Header / nav */
+.site-header .navbar {
+  background-color: #0B1E3D;
+}
+.site-header .navbar-brand, .site-header .nav-link {
+  color: #ffffff;
+}
+.site-header .nav-link:hover {
+  color: #4FC3F7;
 }
 
-
-/* /////////////////////   */
-
-
-
-/* Hero Section */
-.hero {
-  background: linear-gradient(to right, #2563eb, #1e40af);
-  color: white;
-  padding: 5rem 0;
+/* Hero */
+.hero-section {
   position: relative;
+  background-color: #F8FAFC;
+  padding: 5rem 0;
 }
-.hero .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.1), rgba(79,195,247,0.1));
+  pointer-events: none;
 }
-.hero h1 {
-  font-size: 3rem;
+.hero-heading {
+  font-size: 2.8rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  color: #0B1E3D;
 }
-.hero p {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-.hero a {
-  background: white;
-  color: #2563eb;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-.hero a:hover {
-  background: #e5e7eb;
-}
-
-/* Services Section */
-section.bg-gray-100 {
-  background: #f3f4f6;
-  padding: 4rem 0;
-}
-section.bg-gray-100 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-section.bg-gray-100 h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  text-align: center;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-.grid > div {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-.grid i {
-  color: #2563eb;
-  margin-bottom: 1rem;
-}
-.grid h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-.grid p {
-  color: #4b5563;
-}
-
-/* CTA Section */
-section.bg-blue-600 {
-  background: #2563eb;
-  color: white;
-  padding: 4rem 0;
-  text-align: center;
-}
-section.bg-blue-600 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-section.bg-blue-600 h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-section.bg-blue-600 p {
+.hero-subtext {
   font-size: 1.125rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  color: #555;
 }
-section.bg-blue-600 a {
-  background: white;
-  color: #2563eb;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-section.bg-blue-600 a:hover {
-  background: #e5e7eb;
+.hero-image {
+  max-width: 100%;
+  border-radius: 12px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-  .hero p {
-    font-size: 1rem;
-  }
-  section.bg-gray-100 h2,
-  section.bg-blue-600 h2 {
-    font-size: 1.5rem;
-  }
+/* Build platform / features */
+.build-platform-section .section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0B1E3D;
+}
+.build-platform-section .section-lead {
+  font-size: 1.125rem;
+}
+.feature-box {
+  background: #fff;
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.feature-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.feature-box .feature-title {
+  font-weight: 600;
+  margin-top: 0.5rem;
+  color: #0B1E3D;
+}
+.feature-box .feature-desc {
+  margin-top: 0.75rem;
+  color: #666;
+}
+.feature-box .small-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #007BFF;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+.feature-box .small-link:hover {
+  text-decoration: underline;
+}
+
+/* Impact / stats */
+.impact-section {
+  background-color: #F8FAFC;
+}
+.impact-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0B1E3D;
+}
+.impact-label {
+  font-size: 1rem;
+  color: #777;
+}
+
+/* Video */
+.video-section .section-title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.video-section .section-lead {
+  font-size: 1.125rem;
+  color: #555;
+}
+
+/* Modules / products */
+.modules-section .module-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.modules-section .module-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.modules-section .module-card h5 {
+  font-weight: 600;
+  color: #0B1E3D;
+}
+.modules-section .module-card p {
+  color: #666;
+}
+.modules-section .module-card .small-link {
+  color: #007BFF;
+  font-size: 0.875rem;
+}
+.modules-section .module-card .small-link:hover {
+  text-decoration: underline;
+}
+
+/* Partners */
+.partners-section .section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #0B1E3D;
+}
+.partner-logo {
+  max-height: 60px;
+  object-fit: contain;
+  filter: grayscale(50%);
+  transition: filter 0.3s;
+}
+.partner-logo:hover {
+  filter: grayscale(0);
+}
+
+/* Story / Founder */
+.story-section {
+  padding: 5rem 0;
+}
+.story-section .section-title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.story-section .section-lead {
+  font-size: 1.125rem;
+  color: #ddd;
+}
+.founder-photo {
+  max-width: 250px;
+  border-radius: 50%;
+}
+
+/* Footer */
+.site-footer {
+  background-color: #0B1E3D;
+  color: #ddd;
+}
+.site-footer p {
+  margin: 0;
+}
+
+/* Buttons override */
+.btn-primary {
+  background-color: #007BFF;
+  border-color: #007BFF;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+.btn-outline-light {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+.btn-outline-light:hover {
+  color: #0B1E3D;
+  background-color: #ffffff;
+}
+
+
+
+
+/* ////////////////////////////////////////// about page /////////////////////////////  */
+
+/* ---------- About Hero ---------- */
+.about-hero {
+  position: relative;
+  background-color: #F8FAFC;
+  padding: 5rem 0;
+}
+.about-hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.1), rgba(79,195,247,0.1));
+  pointer-events: none;
+}
+.about-heading {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #0B1E3D;
+}
+.about-heading .text-primary {
+  color: #007BFF;
+}
+.about-subtext {
+  font-size: 1.125rem;
+  margin-top: 1rem;
+  color: #555;
+}
+.about-banner-img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+/* ------ Our Story Section ------ */
+.our-story .founder-img {
+  max-width: 180px;
+  border-radius: 50%;
+}
+.story-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0B1E3D;
+}
+.story-text {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ------ Stats / Values ------ */
+.stats-values {
+  position: relative;
+  padding: 5rem 0;
+}
+.value-blob {
+  background: #007BFF;
+  border-radius: 36px;
+  padding: 2rem;
+  color: #fff;
+}
+.stat-box {
+  text-align: center;
+  padding: 1rem;
+}
+.stat-box h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0B1E3D;
+}
+.stat-box p {
+  margin: 0;
+  color: #777;
+}
+.icon-value {
+  font-size: 2rem;
+}
+
+/* ------ Team / Leadership ------ */
+.team-card {
+  background: #fff;
+  border-radius: 16px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.team-img {
+  max-width: 120px;
+  border-radius: 50%;
+}
+.team-bio {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* ------ Partners / Media ------ */
+.partners-media-section .section-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0B1E3D;
+}
+.partner-logo {
+  filter: grayscale(50%);
+  transition: filter 0.3s;
+}
+.partner-logo:hover {
+  filter: grayscale(0);
+}
+.media-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.media-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.media-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ------ Founder / Vision Video ------ */
+.founder-video-section .section-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0B1E3D;
+}
+
+/* ------ Contact / Get Involved ------ */
+.contact-involve-section .form-control {
+  border-radius: 8px;
+}
+.contact-involve-section .btn {
+  border-radius: 8px;
+}
+
+
+
+/* ---------- Features Hero ---------- */
+.features-hero {
+  position: relative;
+  background-color: #F8FAFC;
+  padding: 5rem 0;
+}
+.features-hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.1), rgba(79,195,247,0.1));
+  pointer-events: none;
+}
+.features-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0B1E3D;
+}
+.features-subtext {
+  font-size: 1.125rem;
+  margin-top: 1rem;
+  color: #555;
+}
+.features-banner-img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+/* ---------- Feature List ---------- */
+.features-list .feature-box {
+  background: #fff;
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.features-list .feature-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.features-list .feature-title {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  color: #0B1E3D;
+}
+.features-list .feature-desc {
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+/* ---------- Integration Section ---------- */
+.integration-section .section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0B1E3D;
+}
+.integration-section .section-lead {
+  font-size: 1.125rem;
+  color: #555;
+}
+.features-integration-list li {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* ---------- Use Cases ---------- */
+.usecases-section .section-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0B1E3D;
+}
+.usecases-section .section-subheading {
+  font-size: 1.125rem;
+  color: #777;
+}
+.usecase-card {
+  background: #fff;
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.usecase-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* ---------- CTA Section ---------- */
+.features-cta-section {
+  background: #fff;
+  padding: 4rem 0;
+}
+.cta-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0B1E3D;
+}
+.cta-subtext {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #555;
 }
