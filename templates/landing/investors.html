@@ -1,1 +1,135 @@
-<h1>Hi Investors</h1>
+{% extends 'layouts/base_public.html' %}
+{% block title %}Investors — SyringeTracker{% endblock %}
+
+{% block content %}
+<section class="investors-section py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="fw-bold display-5">Our Investors</h1>
+      <p class="text-muted fs-5">Empowering innovation in healthcare and safety tracking.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4 col-sm-6">
+        <div class="card investor-card shadow p-4 text-center">
+          <div class="investor-logo mb-3">
+            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG9zcGl0YWxzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" alt="Global Health Ventures">
+          </div>
+          <h5 class="fw-bold mb-2">Global Health Ventures</h5>
+          <p class="text-muted">Transformative medical technologies for global health.</p>
+          <a href="#" class="btn btn-outline-primary rounded-pill mt-2">Visit Site</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+        <div class="card investor-card shadow p-4 text-center">
+          <div class="investor-logo mb-3">
+            <img src="https://images.unsplash.com/photo-1628372095387-017d1099fc19?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGhvc3BpdGFsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" alt="MedTech Capital">
+          </div>
+          <h5 class="fw-bold mb-2">MedTech Capital</h5>
+          <p class="text-muted">Supporting next-gen healthcare startups.</p>
+          <a href="#" class="btn btn-outline-primary rounded-pill mt-2">Visit Site</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+        <div class="card investor-card shadow p-4 text-center">
+          <div class="investor-logo mb-3">
+            <img src="https://plus.unsplash.com/premium_photo-1681843129112-f7d11a2f17e3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG9zcGl0YWxzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" alt="Lifeline Partners">
+          </div>
+          <h5 class="fw-bold mb-2">Lifeline Partners</h5>
+          <p class="text-muted">Funding medical safety solutions.</p>
+          <a href="#" class="btn btn-outline-primary rounded-pill mt-2">Visit Site</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+        <div class="card investor-card shadow p-4 text-center">
+          <div class="investor-logo mb-3">
+            <img src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG9zcGl0YWxzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" alt="BrightFuture Fund">
+          </div>
+          <h5 class="fw-bold mb-2">BrightFuture Fund</h5>
+          <p class="text-muted">Fueling sustainable medical tech.</p>
+          <a href="#" class="btn btn-outline-primary rounded-pill mt-2">Visit Site</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+        <div class="card investor-card shadow p-4 text-center">
+          <div class="investor-logo mb-3">
+            <img src="https://images.unsplash.com/photo-1633219664572-473fd988a44f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhvc3BpdGFsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" alt="GreenMed Investments">
+          </div>
+          <h5 class="fw-bold mb-2">GreenMed Investments</h5>
+          <p class="text-muted">Sustainable healthcare innovation.</p>
+          <a href="#" class="btn btn-outline-primary rounded-pill mt-2">Visit Site</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+        <div class="card investor-card shadow p-4 text-center">
+          <div class="investor-logo mb-3">
+            <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGhvc3BpdGFsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" alt="NextGen Ventures">
+          </div>
+          <h5 class="fw-bold mb-2">NextGen Ventures</h5>
+          <p class="text-muted">Scaling med-tech startups globally.</p>
+          <a href="#" class="btn btn-outline-primary rounded-pill mt-2">Visit Site</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 text-center">
+      <h4 class="fw-semibold mb-3">Interested in investing?</h4>
+      <p class="text-muted">Join our mission to make healthcare safer and smarter.</p>
+      <a href="{{ url_for('contact') }}" class="btn btn-primary px-4 py-2 rounded-pill">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.investors-section {
+  background: #f8f9fa;
+  padding: 5rem 0;
+}
+.investor-card {
+  border: none;
+  border-radius: 15px;
+  background: #fff;
+  transition: transform 0.3s ease;
+}
+.investor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.investor-logo img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+.btn-outline-primary {
+  border-color: #007BFF;
+  color: #007BFF;
+}
+.btn-outline-primary:hover {
+  background: #007BFF;
+  color: #fff;
+}
+.btn-primary {
+  background: #007BFF;
+  border: none;
+}
+.btn-primary:hover {
+  background: #0056b3;
+}
+</style>
+
+<script>
+// Handle image loading errors
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".investor-logo img").forEach((img) => {
+    img.addEventListener("error", () => {
+      img.src = "https://placehold.co/90x90/CCCCCC/FFF?text=Image+Failed";
+    });
+  });
+});
+</script>
+{% endblock %}

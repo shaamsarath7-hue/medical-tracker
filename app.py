@@ -23,7 +23,6 @@ def load_user(user_id):
 # Context processor to inject datetime into all templates
 @app.context_processor
 def inject_datetime():
-    # Now `datetime` is available in Jinja2 templates
     return dict(datetime=datetime)
 
 # Create tables and default admin at startup
@@ -42,7 +41,6 @@ with app.app_context():
         db.session.commit()
 
 # ===== Landing / public pages =====
-
 @app.route('/')
 def landing():
     return render_template('landing/home.html')
@@ -59,10 +57,17 @@ def features():
 def contact():
     return render_template('landing/contact.html')
 
+@app.route('/news')
+def news():
+    # News will be fetched dynamically from DB or API in future
+    return render_template('landing/news.html')
 
+@app.route('/investors')
+def investors():
+    # Investors will be fetched dynamically from DB in future
+    return render_template('landing/investors.html')
 
 # ===== Login / Logout =====
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -88,7 +93,6 @@ def logout():
     return redirect(url_for('landing'))
 
 # ===== Dashboard / Syringe pages =====
-
 @app.route('/dashboard')
 @login_required
 def dashboard():

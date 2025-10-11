@@ -1,1 +1,97 @@
-<h1>NEWS</h1>
+{% extends 'layouts/base_public.html' %}
+{% block content %}
+<!-- News Page -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+  body {
+    background: #f9fafb;
+  }
+  .news-section {
+    padding: 60px 0;
+  }
+  .news-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .news-header h1 {
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: #1f2937;
+  }
+  .news-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform .3s ease, box-shadow .3s ease;
+    background: white;
+  }
+  .news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  }
+  .news-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+  .news-card .card-body {
+    padding: 20px;
+  }
+  .news-card .card-title {
+    font-weight: 600;
+    color: #111827;
+  }
+  .news-card .card-text {
+    color: #4b5563;
+  }
+  .read-more {
+    color: #0d6efd;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .read-more:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<section class="news-section container">
+  <div class="news-header" data-aos="fade-up">
+    <h1>Latest Healthcare & Tech News</h1>
+    <p class="text-muted">Stay updated with the world of innovation and syringe safety</p>
+  </div>
+
+  <div class="row g-4">
+    {% set news_list = [
+      {'title': 'AI Revolutionizes Medical Supply Tracking', 'img': 'https://images.unsplash.com/photo-1602021727639-deddded5dc69?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWVkaWNhbCUyMG5ld3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600', 'desc': 'Artificial Intelligence is transforming syringe and vaccine supply monitoring, ensuring zero wastage.'},
+      {'title': 'SyringeTracker Partners with WHO for Global Safety Initiative', 'img': 'https://images.unsplash.com/photo-1639829743267-cb0341cf341e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWVkaWNhbCUyMG5ld3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600', 'desc': 'A groundbreaking partnership aims to eliminate unsafe syringe reuse worldwide.'},
+      {'title': 'Biodegradable Syringes Enter Mass Production', 'img': 'https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1lZGljYWwlMjBuZXdzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600', 'desc': 'Eco-friendly syringe materials promise to reduce medical waste drastically.'},
+      {'title': 'India Launches Smart Medical Waste Program', 'img': 'https://images.unsplash.com/photo-1631507623095-c710d184498f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG1lZGljYWwlMjBuZXdzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600', 'desc': 'The new initiative integrates IoT sensors to manage syringe disposal efficiently.'},
+      {'title': 'Blockchain Ensures Vaccine Syringe Authenticity', 'img': 'https://images.unsplash.com/photo-1561328635-c1c6ad1753b0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fG1lZGljYWwlMjBuZXdzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600', 'desc': 'Blockchain is now used to verify and trace each syringe used in vaccination campaigns.'},
+      {'title': '3D Printing Disrupts Syringe Design', 'img': 'https://images.unsplash.com/photo-1631507623121-eaaba8d4e7dc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG1lZGljYWwlMjBuZXdzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600', 'desc': 'Innovators create precision-engineered syringes tailored for minimal pain.'},
+      {'title': 'Startup Raises $15M to Combat Medical Counterfeits', 'img': 'https://media.istockphoto.com/id/1224333792/photo/the-world-after-covid-19-article.webp?a=1&b=1&s=612x612&w=0&k=20&c=M0j06YAD-0G4GqGo-5xDb8gYjvM-j_2Wt6e7uM3jh7s=', 'desc': 'A health-tech startup develops tools to authenticate syringe origins in real-time.'},
+      {'title': 'Doctors Praise Smart Syringe Alert Systems', 'img': 'https://plus.unsplash.com/premium_photo-1672759455907-bdaef741cd88?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMG5ld3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600', 'desc': 'Hospitals report 40% fewer syringe-related incidents after adopting digital tracking.'},
+      {'title': 'Robotics in Syringe Packaging Plants', 'img': 'https://plus.unsplash.com/premium_photo-1702598689650-bca5a10ab958?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWVkaWNhbCUyMG5ld3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600', 'desc': 'Automation reduces human contact, ensuring sterile and precise packaging.'},
+      {'title': 'Syringe Recycling Reaches 95% Efficiency', 'img': 'https://images.unsplash.com/photo-1759693834549-ff197ef70bc3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG1lZGljYWwlMjBuZXdzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600', 'desc': 'New recycling tech allows syringes to be safely converted into reusable materials.'}
+    ] %}
+
+    {% for news in news_list %}
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
+        <div class="card news-card">
+          <img src="{{ news.img }}" alt="{{ news.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ news.title }}</h5>
+            <p class="card-text">{{ news.desc }}</p>
+            <a href="#" class="read-more">Read more →</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000, once: true });
+</script>
+{% endblock %}
