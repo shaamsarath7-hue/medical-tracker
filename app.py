@@ -59,6 +59,8 @@ def features():
 def contact():
     return render_template('landing/contact.html')
 
+
+
 # ===== Login / Logout =====
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -165,7 +167,7 @@ def syringe_history(id):
           .order_by(SyringeHistory.timestamp.desc())
     ).scalars().all()
 
-    return render_template('dashboard/history.html', syringe=syringe, history=history)
+    return render_template('history.html', syringe=syringe, history=history)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -31,12 +31,12 @@ body {
 .hero-heading {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #0B1E3D;
+  color: #fff;
 }
 .hero-subtext {
   font-size: 1.125rem;
   margin-top: 1rem;
-  color: #555;
+  color: #fff;
 }
 .hero-image {
   max-width: 100%;

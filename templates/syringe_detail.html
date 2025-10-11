@@ -1,29 +1,134 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <div class="card shadow p-4">
-      <h3 class="mb-3">Update Syringe</h3>
-      <form method="POST">
-        <div class="mb-3">
-          <label class="form-label">Syringe ID</label>
-          <input type="text" class="form-control" value="{{ syringe.syringe_id }}" readonly>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Status</label>
-          <select name="status" class="form-select">
-            <option value="Available" {% if syringe.status=="Available" %}selected{% endif %}>Available</option>
-            <option value="In Use" {% if syringe.status=="In Use" %}selected{% endif %}>In Use</option>
-            <option value="Disposed" {% if syringe.status=="Disposed" %}selected{% endif %}>Disposed</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Patient Info</label>
-          <input type="text" name="patient_info" class="form-control" value="{{ syringe.patient_info }}">
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Update Syringe</button>
-      </form>
+<style>
+/* Page background */
+.update-syringe-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f0f4ff, #e2f0ff);
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+/* Floating shapes (like soft glowing circles) */
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
+    100% { transform: translateY(0px) rotate(360deg); opacity: 0.7; }
+}
+.floating-shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 123, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Card styling */
+.update-syringe-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.update-syringe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+/* Heading */
+.update-syringe-card h3 {
+    color: #007BFF;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* Form inputs */
+.update-syringe-card .form-control,
+.update-syringe-card .form-select {
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+}
+.update-syringe-card .form-control:focus,
+.update-syringe-card .form-select:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 8px rgba(0,123,255,0.3);
+}
+
+/* Button */
+.btn-primary {
+    border-radius: 50px;
+    padding: 0.6rem 0;
+    font-weight: 600;
+    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(0,123,255,0.2);
+}
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(0,123,255,0.3);
+}
+
+/* Optional fun animation: button pulse */
+@keyframes pulseBtn {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+.btn-primary.pulse {
+    animation: pulseBtn 1.5s infinite;
+}
+</style>
+
+<div class="update-syringe-page">
+    <div class="update-syringe-card">
+        <h3>Update Syringe</h3>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Syringe ID</label>
+                <input type="text" class="form-control" value="{{ syringe.syringe_id }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-select">
+                    <option value="Available" {% if syringe.status=="Available" %}selected{% endif %}>Available</option>
+                    <option value="In Use" {% if syringe.status=="In Use" %}selected{% endif %}>In Use</option>
+                    <option value="Disposed" {% if syringe.status=="Disposed" %}selected{% endif %}>Disposed</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Patient Info</label>
+                <input type="text" name="patient_info" class="form-control" value="{{ syringe.patient_info }}">
+            </div>
+            <button type="submit" class="btn btn-primary w-100 pulse">Update Syringe</button>
+        </form>
     </div>
-  </div>
 </div>
+
+<script>
+// Floating background shapes
+const page = document.querySelector('.update-syringe-page');
+const colors = ['rgba(0,123,255,0.1)', 'rgba(0,200,255,0.1)', 'rgba(100,149,237,0.1)'];
+
+for (let i=0; i<12; i++) {
+    const div = document.createElement('div');
+    div.className = 'floating-shape';
+    const size = Math.random()*40 + 20;
+    div.style.width = `${size}px`;
+    div.style.height = `${size}px`;
+    div.style.top = `${Math.random()*100}%`;
+    div.style.left = `${Math.random()*100}%`;
+    div.style.background = colors[Math.floor(Math.random()*colors.length)];
+    div.style.animationDuration = `${5 + Math.random()*5}s`;
+    page.appendChild(div);
+}
+</script>
 {% endblock %}

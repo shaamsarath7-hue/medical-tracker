@@ -2,160 +2,204 @@
 {% block title %}Home — SyringeTracker{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="hero-section position-relative overflow-hidden">
+
+<!-- ========== Add Google Fonts and Font Awesome ========== -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- ========== Inline CSS for animations ========== -->
+<style>
+/* General Body */
+body { font-family: 'Poppins', sans-serif; color: #333; background-color: #fff; }
+
+/* Hero Section */
+.hero-section { position: relative; height: 85vh; overflow: hidden; }
+.hero-video-iframe { position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; }
+.hero-video-iframe video { width:100%; height:100%; object-fit:cover; }
+.hero-overlay { position:absolute; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.4); z-index:1; }
+.hero-content { position: relative; z-index:2; }
+.hero-heading { margin-top:9rem; font-size:3rem; font-weight:700; color:#fff; opacity:0; animation: fadeInUp 1s forwards; }
+.hero-subtext { font-size:1.2rem; margin-top:1rem; color:#fff; opacity:0; animation: fadeInUp 1s forwards 0.5s; }
+.btn-primary { background-color:#007BFF; border:none; padding:0.75rem 2rem; font-size:1.1rem; transition: transform 0.3s; }
+.btn-primary:hover { transform: scale(1.05); background-color:#0056b3; }
+
+/* Animations */
+@keyframes fadeInUp { 0% { opacity:0; transform:translateY(20px); } 100% { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { 0% { opacity:0; } 100% { opacity:1; } }
+
+/* Feature Boxes */
+.feature-box { background:#fff; border-radius:12px; padding:2rem; text-align:center; transition:all 0.4s; cursor:pointer; opacity:0; }
+.feature-box:hover { transform: translateY(-8px) scale(1.03); box-shadow:0 20px 40px rgba(0,0,0,0.15); }
+.feature-box i { font-size:2rem; color:#007BFF; transition: transform 0.3s, color 0.3s; }
+.feature-box:hover i { transform: scale(1.2); color:#0056b3; }
+
+/* Stats / Impact */
+.impact-section { background:#F8FAFC; padding:5rem 0; text-align:center; }
+.impact-number { font-size:2.5rem; font-weight:700; color:#0B1E3D; opacity:1; }
+.impact-label { font-size:1rem; color:#777; }
+
+/* Video Demo Section */
+.video-section { padding:5rem 0; text-align:center; }
+.video-section video { width:100%; max-height:450px; border:none; border-radius:12px; object-fit:cover; }
+
+/* Modules / Products */
+.module-card { background:#fff; border-radius:12px; padding:2rem; text-align:center; margin-bottom:2rem; transition:all 0.4s; opacity:0; }
+.module-card:hover { transform: translateY(-10px) scale(1.05); box-shadow:0 25px 45px rgba(0,0,0,0.15); }
+
+/* Partners Section */
+.partner-logo { max-height:60px; filter:grayscale(50%); transition: filter 0.3s; }
+.partner-logo:hover { filter:grayscale(0); }
+
+/* Story / Founder */
+.story-section { padding:5rem 0; background:#0B1E3D; color:#fff; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+.founder-photo { max-width:250px; border-radius:50%; opacity:0; }
+.story-text { max-width:500px; opacity:0; }
+
+/* Scroll animations */
+.in-view { opacity:1; animation: fadeInUp 1s forwards; }
+
+/* Responsive */
+@media(max-width:768px) { .hero-heading { font-size:2.2rem; } .hero-subtext { font-size:1rem; } }
+</style>
+
+<!-- ========== Hero Section ========== -->
+<section class="hero-section">
+  <div class="hero-video-iframe">
+    <video src="https://www.pddinnovation.com/wp-content/uploads/2023/03/Web-Animation-R_5.mp4" autoplay muted loop playsinline></video>
+  </div>
   <div class="hero-overlay"></div>
-  <div class="container py-5">
-    <div class="row align-items-center">
-      <div class="col-lg-6 text-start">
-        <h1 class="hero-heading">Digital Infrastructure Platform <br>for Healthcare</h1>
-        <p class="hero-subtext">Innovative syringe tracking, real-time updates, full auditability — powered for modern medical operations.</p>
-        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg mt-3">Explore</a>
-      </div>
-      <div class="col-lg-6 text-center">
-        <img src="{{ url_for('static', filename='images/hero_demo.png') }}" alt="Healthcare illustration"
-             class="img-fluid hero-image">
-      </div>
-    </div>
+  <div class="container hero-content">
+    <h1 class="hero-heading">Delivering Meaningful Innovation</h1>
+    <p class="hero-subtext">Innovative syringe tracking, real-time updates, full auditability — powered for modern medical operations.</p>
+    <a href="{{ url_for('login') }}" class="btn btn-primary mt-3">Explore</a>
   </div>
 </section>
 
-<!-- Build Platform Section (three features + intro) -->
+<!-- ========== Features Section ========== -->
 <section class="build-platform-section py-5">
   <div class="container">
-    <div class="row mb-5 text-center">
-      <div class="col">
-        <h2 class="section-title">Build a platform for safe medicines</h2>
-        <p class="section-lead text-muted">We provide infrastructure, tracking, and secure operations for healthcare entities to ensure trust and efficiency.</p>
-      </div>
+    <div class="row text-center mb-5">
+      <div class="col"><h2 class="section-title">Build a platform for safe medicines</h2></div>
     </div>
-
-    <div class="row text-start">
-      <div class="col-md-4 mb-4">
-        <div class="feature-box p-4 shadow-sm">
-          <i class="fas fa-check-circle fa-2x text-primary mb-3"></i>
-          <h5 class="feature-title">Authentic</h5>
-          <p class="feature-desc text-muted">Instant validation of syringes with full transparency and trust.</p>
-          <a href="#" class="small-link">Get scanner →</a>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="feature-box p-4 shadow-sm">
-          <i class="fas fa-globe fa-2x text-success mb-3"></i>
-          <h5 class="feature-title">Accessible</h5>
-          <p class="feature-desc text-muted">Available across hospitals, pharmacies, and clinics — anywhere.</p>
-          <a href="#" class="small-link">Shop marketplace →</a>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="feature-box p-4 shadow-sm">
-          <i class="fas fa-wallet fa-2x text-info mb-3"></i>
-          <h5 class="feature-title">Affordable</h5>
-          <p class="feature-desc text-muted">Cost-effective solutions for health providers and patients alike.</p>
-          <a href="#" class="small-link">Make inquiry →</a>
-        </div>
-      </div>
+    <div class="row text-center">
+      <div class="col-md-4"><div class="feature-box"><i class="fas fa-check-circle"></i><h5>Authentic</h5><p>Instant validation of syringes with full transparency.</p></div></div>
+      <div class="col-md-4"><div class="feature-box"><i class="fas fa-globe"></i><h5>Accessible</h5><p>Available across hospitals, pharmacies, and clinics.</p></div></div>
+      <div class="col-md-4"><div class="feature-box"><i class="fas fa-wallet"></i><h5>Affordable</h5><p>Cost-effective solutions for health providers and patients.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- Stats / Impact Section -->
-<section class="impact-section py-5 bg-light">
-  <div class="container text-center">
-    <div class="row gy-4">
-      <div class="col-md-3">
-        <h3 class="impact-number">15+</h3>
-        <p class="impact-label">Countries covered</p>
-      </div>
-      <div class="col-md-3">
-        <h3 class="impact-number">10 min+</h3>
-        <p class="impact-label">To scan a syringe</p>
-      </div>
-      <div class="col-md-3">
-        <h3 class="impact-number">10,000+</h3>
-        <p class="impact-label">Active users</p>
-      </div>
-      <div class="col-md-3">
-        <h3 class="impact-number">200+</h3>
-        <p class="impact-label">Partners & clients</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Video / Demo Section -->
-<section class="video-section py-5">
-  <div class="container text-center">
-    <h2 class="section-title">Get RxScanner</h2>
-    <p class="section-lead text-muted mb-4">Watch a quick demo of how the scanner works.</p>
-    <div class="ratio ratio-16x9 mx-auto shadow rounded-3 overflow-hidden" style="max-width: 800px;">
-      <iframe src="https://samplelib.com/lib/preview/mp4/sample-20s.mp4" title="Scanner Demo" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
-
-<!-- Products / Modules Section -->
-<section class="modules-section py-5 bg-light">
+<!-- ========== Stats Section ========== -->
+<section class="impact-section">
   <div class="container">
-    <div class="row gy-4 justify-content-center">
-      <div class="col-md-4">
-        <div class="module-card p-4 shadow-sm">
-          <h5>RxDelivered</h5>
-          <p class="text-muted">Marketplace for authenticated products.</p>
-          <a href="#" class="small-link">Shop marketplace →</a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="module-card p-4 shadow-sm">
-          <h5>RxPay</h5>
-          <p class="text-muted">Financial solutions for health providers.</p>
-          <a href="#" class="small-link">Get app →</a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="module-card p-4 shadow-sm">
-          <h5>Community Portal</h5>
-          <p class="text-muted">Join the global health network.</p>
-          <a href="#" class="small-link">Learn more →</a>
-        </div>
-      </div>
+    <div class="row">
+      <div class="col-md-3"><h3 class="impact-number" data-target="15">0</h3><p class="impact-label">Countries covered</p></div>
+      <div class="col-md-3"><h3 class="impact-number" data-target="10">0</h3><p class="impact-label">Minutes to scan</p></div>
+      <div class="col-md-3"><h3 class="impact-number" data-target="10000">0</h3><p class="impact-label">Active users</p></div>
+      <div class="col-md-3"><h3 class="impact-number" data-target="200">0</h3><p class="impact-label">Partners & clients</p></div>
     </div>
   </div>
 </section>
 
-<!-- Partners Section -->
+<!-- ========== Video Demo Section ========== -->
+<section class="video-section">
+  <h2>Get RxScanner</h2>
+  <p>Watch a quick demo of how the scanner works.</p>
+  <video controls>
+    <source src="https://samplelib.com/lib/preview/mp4/sample-20s.mp4" type="video/mp4">
+  </video>
+</section>
+
+<!-- ========== Modules Section ========== -->
+<section class="modules-section py-5 bg-light">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-4"><div class="module-card"><h5>RxDelivered</h5><p>Marketplace for authenticated products.</p></div></div>
+      <div class="col-md-4"><div class="module-card"><h5>RxPay</h5><p>Financial solutions for health providers.</p></div></div>
+      <div class="col-md-4"><div class="module-card"><h5>Community Portal</h5><p>Join the global health network.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Partners Section ========== -->
 <section class="partners-section py-5">
   <div class="container text-center">
-    <h2 class="section-title mb-5">Partners</h2>
-    <div class="row justify-content-center gy-4">
-      <div class="col-4 col-md-2">
-        <img src="{{ url_for('static', filename='images/partner1.png') }}" alt="Partner 1" class="img-fluid partner-logo">
-      </div>
-      <div class="col-4 col-md-2">
-        <img src="{{ url_for('static', filename='images/partner2.png') }}" alt="Partner 2" class="img-fluid partner-logo">
-      </div>
-      <div class="col-4 col-md-2">
-        <img src="{{ url_for('static', filename='images/partner3.png') }}" alt="Partner 3" class="img-fluid partner-logo">
-      </div>
+    <h2>Partners</h2>
+    <div class="row justify-content-center">
+      <div class="col-4 col-md-2"><img class="partner-logo" src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="Partner"></div>
+      <div class="col-4 col-md-2"><img class="partner-logo" src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="Partner"></div>
+      <div class="col-4 col-md-2"><img class="partner-logo" src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="Partner"></div>
     </div>
   </div>
 </section>
 
-<!-- Story / Founder Section -->
+<!-- ========== Story / Founder Section ========== -->
 <section class="story-section py-5 bg-dark text-white">
   <div class="container">
     <div class="row align-items-center gy-4">
-      <div class="col-md-6">
+      <div class="col-md-6 story-text">
         <h2 class="section-title">RxAll Story</h2>
         <p class="section-lead">From a mission to combat counterfeit drugs to building a global health-tech infrastructure.</p>
         <a href="#" class="btn btn-outline-light mt-3">Learn more →</a>
       </div>
       <div class="col-md-6 text-center">
-        <img src="{{ url_for('static', filename='images/founder.png') }}" alt="Founder" class="img-fluid rounded-circle founder-photo">
+        <img src="https://images.unsplash.com/photo-1562788869-4ed32648eb72?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Q0VPfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" class="founder-photo" alt="Founder">
       </div>
     </div>
   </div>
 </section>
 
-{% endblock %}
+<!-- ========== JS Animations ========== -->
+<script>
+// Ensure DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Count-up animation
+  const counters = document.querySelectorAll('.impact-number');
+  const impactSection = document.querySelector('.impact-section');
+  let counted = false;
 
+  const countUp = (counter) => {
+    const target = parseInt(counter.getAttribute('data-target'), 10);
+    let count = parseInt(counter.innerText, 10);
+    const increment = Math.ceil(target / 100);
+    const update = () => {
+      if (count < target) {
+        count = Math.min(count + increment, target);
+        counter.innerText = count.toLocaleString();
+        requestAnimationFrame(update);
+      } else {
+        counter.innerText = target.toLocaleString();
+      }
+    };
+    update();
+  };
+
+  const countObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      counters.forEach(countUp);
+    }
+  }, { threshold: 0.5 });
+
+  if (impactSection) {
+    countObserver.observe(impactSection);
+  } else {
+    console.warn('Impact section not found');
+  }
+
+  // Fade-in animation
+  const faders = document.querySelectorAll('.feature-box, .module-card, .founder-photo, .story-text');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  faders.forEach(fader => fadeObserver.observe(fader));
+});
+</script>
+
+{% endblock %}

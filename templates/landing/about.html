@@ -2,8 +2,69 @@
 {% block title %}About — SyringeTracker{% endblock %}
 
 {% block content %}
-<!-- Hero / Header for About -->
-<section class="about-hero position-relative overflow-hidden">
+<style>
+/* ---------- General ---------- */
+body { font-family:'Poppins', sans-serif; color:#333; background:#f8f9fa; }
+h2,h4,h5,h6 { font-weight:600; }
+a { text-decoration:none; }
+.btn-primary { background:#007BFF; border:none; padding:0.75rem 2rem; transition:all 0.3s; }
+.btn-primary:hover { background:#0056b3; transform:scale(1.05); }
+
+/* ---------- Hero ---------- */
+.about-hero { position:relative; height:50vh; display:flex; align-items:center; background: url('https://images.unsplash.com/photo-1588776814546-92b17b16f3e2?auto=format&fit=crop&w=1400&q=60') center/cover no-repeat; }
+.about-hero-overlay { position:absolute; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.5); }
+.about-heading { color:#fff; font-size:3rem; animation: fadeInDown 1s forwards; opacity:0; }
+.about-subtext { color:#fff; font-size:1.2rem; margin-top:1rem; animation: fadeInUp 1s 0.5s forwards; opacity:0; }
+.about-banner-img { max-width:100%; border-radius:12px; animation: fadeInRight 1s 0.7s forwards; opacity:0; }
+
+/* ---------- Story ---------- */
+.our-story { padding:5rem 0; }
+.founder-img { width:180px; height:180px; object-fit:cover; border-radius:50%; animation: fadeInUp 1s forwards; opacity:0; }
+.story-title { font-size:2rem; margin-bottom:1rem; }
+.story-text { color:#555; margin-bottom:1rem; }
+
+/* ---------- Stats & Values ---------- */
+.stats-values { padding:5rem 0; }
+.value-blob { background:#007BFF; border-radius:12px; padding:2rem; color:#fff; animation: fadeInLeft 1s forwards; opacity:0; }
+.stat-box { background:#fff; border-radius:12px; padding:1.5rem; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.05); transition:all 0.3s; opacity:0; }
+.stat-box:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,0,0,0.15); }
+.icon-value { font-size:2rem; transition:transform 0.3s; }
+.icon-value:hover { transform:scale(1.2); }
+
+/* ---------- Team ---------- */
+.team-card { background:#fff; border-radius:12px; padding:2rem; transition: transform 0.4s, box-shadow 0.4s; opacity:0; }
+.team-card:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,0,0,0.15); }
+.team-img { width:140px; height:140px; object-fit:cover; border-radius:50%; margin-bottom:1rem; }
+
+/* ---------- Partners & Media ---------- */
+.partner-logo { max-width:100px; filter: grayscale(80%); transition: all 0.3s; }
+.partner-logo:hover { filter:none; transform:scale(1.1); }
+.media-card { background:#fff; border-radius:12px; padding:1.5rem; transition:all 0.3s; opacity:0; }
+.media-card:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,0,0,0.1); }
+
+/* ---------- Video ---------- */
+.ratio { border-radius:12px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.2); animation: fadeIn 1s forwards; opacity:0; }
+
+/* ---------- Contact / Involve ---------- */
+.contact-involve-section .form-control { border-radius:8px; transition: all 0.3s; }
+.contact-involve-section .form-control:focus { box-shadow:0 0 10px rgba(0,123,255,0.5); border-color:#007BFF; }
+.contact-involve-section .btn-outline-primary { border-radius:8px; transition: all 0.3s; }
+.contact-involve-section .btn-outline-primary:hover { background:#007BFF; color:#fff; transform:scale(1.05); }
+
+/* ---------- Animations ---------- */
+@keyframes fadeInDown { 0%{opacity:0; transform:translateY(-20px);} 100%{opacity:1; transform:translateY(0);} }
+@keyframes fadeInUp { 0%{opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+@keyframes fadeInLeft { 0%{opacity:0; transform:translateX(-20px);} 100%{opacity:1; transform:translateX(0);} }
+@keyframes fadeInRight { 0%{opacity:0; transform:translateX(20px);} 100%{opacity:1; transform:translateX(0);} }
+@keyframes fadeIn { 0%{opacity:0;} 100%{opacity:1;} }
+.in-view { opacity:1; animation: fadeInUp 1s forwards; }
+
+/* ---------- Responsive ---------- */
+@media(max-width:992px){ .about-hero h1 { font-size:2rem; text-align:center; } .about-subtext { text-align:center; } .about-banner-img { margin-top:2rem; } }
+</style>
+
+<!-- ---------- Hero ---------- -->
+<section class="about-hero">
   <div class="about-hero-overlay"></div>
   <div class="container py-5">
     <div class="row align-items-center">
@@ -12,217 +73,129 @@
         <p class="about-subtext">People in Africa deserve access to affordable, accessible, and safe medicines. Our mission is to empower healthcare with reliable infrastructure and transparency.</p>
       </div>
       <div class="col-lg-6 text-end">
-        <img src="{{ url_for('static', filename='images/about_banner.png') }}" alt="About Illustration" class="img-fluid about-banner-img">
+        <img src="https://plus.unsplash.com/premium_vector-1725460135156-486abbbe8470?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHN5cmluZ2UlMjB0cmFja2VyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=200" alt="About Illustration" class="img-fluid about-banner-img">
       </div>
     </div>
   </div>
 </section>
 
-<!-- Our Story -->
-<section class="our-story py-5">
-  <div class="container">
-    <div class="row align-items-center gy-4">
-      <div class="col-md-4 text-center">
-        <img src="{{ url_for('static', filename='images/founder_about.png') }}" alt="Founder" class="img-fluid rounded-circle founder-img">
-        <p class="mt-3 fw-bold">Adebayo Alonge</p>
+<!-- ---------- Our Story ---------- -->
+<section class="our-story container">
+  <div class="row align-items-center gy-4">
+    <div class="col-md-4 text-center">
+      <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=300&q=60" alt="Founder" class="founder-img">
+      <p class="mt-3 fw-bold">Adebayo Alonge</p>
+      <p class="text-muted">Founder & CEO</p>
+    </div>
+    <div class="col-md-8">
+      <h3 class="story-title">Our Story</h3>
+      <p class="story-text text-muted">SyringeTracker started with a vision to eliminate fake medicines and improve healthcare access. Our journey began with small-scale trials and a commitment to transparency.</p>
+      <p class="story-text text-muted">Through partnerships, technology, and community engagement, we have scaled operations across regions and impacted thousands of lives.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- Stats & Values ---------- -->
+<section class="stats-values container">
+  <div class="row gy-4 align-items-center">
+    <div class="col-lg-6">
+      <div class="value-blob p-4">
+        <h4>World that <span class="fw-bold">we create</span> is the world where everyone can <span class="fw-bold">trust medicine</span>.</h4>
+        <p class="mt-3">Where medicine will <span class="fw-bold">make us well, not sick.</span></p>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="row gy-4">
+        <div class="col-sm-6"><div class="stat-box"><h3>6 years</h3><p>Experience</p></div></div>
+        <div class="col-sm-6"><div class="stat-box"><h3>300+</h3><p>Partners & clients</p></div></div>
+        <div class="col-sm-6"><div class="stat-box"><h3>2.5 mln+</h3><p>Scans & engagements</p></div></div>
+        <div class="col-sm-6"><div class="stat-box"><h3>200+</h3><p>Countries / Regions</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <div class="row mt-5 text-center gy-4">
+    <div class="col-md-3"><i class="fas fa-lightbulb icon-value text-primary mb-2"></i><h5>Innovative</h5><p class="text-muted">Constantly pushing boundaries in health tech.</p></div>
+    <div class="col-md-3"><i class="fas fa-globe icon-value text-success mb-2"></i><h5>Open-minded</h5><p class="text-muted">Inclusive solutions for global challenges.</p></div>
+    <div class="col-md-3"><i class="fas fa-handshake icon-value text-info mb-2"></i><h5>Collaborative</h5><p class="text-muted">Partnerships drive our impact.</p></div>
+    <div class="col-md-3"><i class="fas fa-heart icon-value text-danger mb-2"></i><h5>Passionate</h5><p class="text-muted">We care deeply about safe health.</p></div>
+  </div>
+</section>
+
+<!-- ---------- Team ---------- -->
+<section class="team-section container py-5">
+  <div class="row mb-4 text-center"><div class="col"><h2 class="section-heading">Expert Leadership</h2></div></div>
+  <div class="row gy-4 justify-content-center">
+    <div class="col-sm-6 col-md-4">
+      <div class="team-card text-center p-3 shadow-sm">
+        <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=300&q=60" class="team-img" alt="Team">
+        <h5>Adebayo Alonge</h5>
         <p class="text-muted">Founder & CEO</p>
+        <p class="team-bio text-muted">Short bio about role, expertise, and accomplishments.</p>
       </div>
-      <div class="col-md-8">
-        <h3 class="story-title">Our Story</h3>
-        <p class="story-text text-muted">
-          Insert your organization's journey, vision, and mission here. Describe how SyringeTracker started, the challenges faced, and the milestones achieved. Use multiple paragraphs if needed.  
-        </p>
-        <p class="story-text text-muted">
-          Continue the narrative: highlight impact, growth, and future goals.
-        </p>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <div class="team-card text-center p-3 shadow-sm">
+        <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=300&q=60" class="team-img" alt="Team">
+        <h5>Jane Doe</h5>
+        <p class="text-muted">COO</p>
+        <p class="team-bio text-muted">Short bio about role, expertise, and accomplishments.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Stats / Mission / Values -->
-<section class="stats-values py-5 bg-light">
-  <div class="container">
-    <div class="row gy-4 align-items-center">
-      <div class="col-lg-6">
-        <div class="value-blob p-4">
-          <h4 class="text-white">World that <span class="fw-bold">we create</span> is the world where everyone can <span class="fw-bold">trust medicine</span>.</h4>
-          <p class="text-white mt-3">Where medicine will <span class="fw-bold">make us well, not sick.</span></p>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="row gy-4">
-          <div class="col-sm-6">
-            <div class="stat-box">
-              <h3>6 years</h3>
-              <p>Experience</p>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="stat-box">
-              <h3>300+</h3>
-              <p>Partners & clients</p>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="stat-box">
-              <h3>2.5 mln+</h3>
-              <p>Scans & engagements</p>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="stat-box">
-              <h3>200+</h3>
-              <p>Countries / Regions</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- ---------- Partners / Media ---------- -->
+<section class="partners-media-section container py-5">
+  <div class="row mb-4 text-center"><div class="col"><h2>Partners & Media</h2></div></div>
+  <div class="row justify-content-center gy-4">
+    <div class="col-4 col-md-2 text-center"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" class="partner-logo"></div>
+    <div class="col-4 col-md-2 text-center"><img src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" class="partner-logo"></div>
+    <div class="col-4 col-md-2 text-center"><img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" class="partner-logo"></div>
+  </div>
+  <div class="row mt-5 gy-4">
+    <div class="col-md-4 text-center"><div class="media-card p-3 shadow-sm"><h6>The Guardian</h6><p class="text-muted small">Fighting fake medicines</p></div></div>
+    <div class="col-md-4 text-center"><div class="media-card p-3 shadow-sm"><h6>BBC News</h6><p class="text-muted small">Health tech revolution</p></div></div>
+    <div class="col-md-4 text-center"><div class="media-card p-3 shadow-sm"><h6>Chemistry World</h6><p class="text-muted small">Global health impact</p></div></div>
+  </div>
+</section>
 
-    <!-- Values-driven transformation -->
-    <div class="row mt-5">
-      <div class="col text-center">
-        <h4 class="fw-bold">Values-driven transformation</h4>
-      </div>
+<!-- ---------- Founder Video ----------
+<section class="founder-video-section py-5 text-center">
+  <h2>Meet the Vision</h2>
+  <div class="ratio ratio-16x9 mx-auto shadow rounded-3 overflow-hidden" style="max-width:800px;">
+    <iframe src="https://samplelib.com/lib/preview/mp4/sample-20s.mp4" title="Founder Video" allowfullscreen></iframe>
+  </div>
+</section> -->
+
+<!-- ---------- Contact / Get Involved ---------- -->
+<section class="contact-involve-section container py-5">
+  <div class="row gy-4">
+    <div class="col-md-6">
+      <h4>Contact Us</h4>
+      <form action="{{ url_for('contact') }}" method="post">
+        <div class="mb-3"><label>Name</label><input type="text" name="name" class="form-control" placeholder="Your name"></div>
+        <div class="mb-3"><label>Email</label><input type="email" name="email" class="form-control" placeholder="you@example.com"></div>
+        <div class="mb-3"><label>Message</label><textarea name="message" rows="4" class="form-control" placeholder="Your message..."></textarea></div>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
     </div>
-    <div class="row gy-4 mt-3">
-      <div class="col-md-3 text-center">
-        <i class="fas fa-lightbulb icon-value text-primary mb-2"></i>
-        <h5>Innovative</h5>
-        <p class="text-muted">Constantly pushing boundaries in health tech.</p>
-      </div>
-      <div class="col-md-3 text-center">
-        <i class="fas fa-globe icon-value text-success mb-2"></i>
-        <h5>Open-minded</h5>
-        <p class="text-muted">Inclusive solutions for global challenges.</p>
-      </div>
-      <div class="col-md-3 text-center">
-        <i class="fas fa-handshake icon-value text-info mb-2"></i>
-        <h5>Collaborative</h5>
-        <p class="text-muted">Partnerships drive our impact.</p>
-      </div>
-      <div class="col-md-3 text-center">
-        <i class="fas fa-heart icon-value text-danger mb-2"></i>
-        <h5>Passionate</h5>
-        <p class="text-muted">We care deeply about safe health.</p>
-      </div>
+    <div class="col-md-6 text-center">
+      <h4>Get Involved</h4>
+      <p class="text-muted">Join our mission. Collaborate, partner, or contribute — together we improve access to safe medicines.</p>
+      <a href="#" class="btn btn-outline-primary">Help us now</a>
     </div>
   </div>
 </section>
 
-<!-- Leadership / Team -->
-<section class="team-section py-5">
-  <div class="container">
-    <div class="row mb-4 text-center">
-      <div class="col">
-        <h2 class="section-heading">Expert Leadership</h2>
-      </div>
-    </div>
-    <div class="row gy-4 justify-content-center">
-      <!-- Example member -->
-      <div class="col-sm-6 col-md-4">
-        <div class="team-card p-3 shadow-sm text-center">
-          <img src="{{ url_for('static', filename='images/team1.png') }}" alt="Team Member" class="img-fluid rounded-circle mb-3 team-img">
-          <h5 class="mb-1">Adebayo Alonge</h5>
-          <p class="text-muted">Founder & CEO</p>
-          <p class="team-bio text-muted">Short bio about their role, expertise, background, accomplishments.</p>
-        </div>
-      </div>
-      <!-- Add more team members similarly -->
-      <!-- e.g. -->
-      <div class="col-sm-6 col-md-4">
-        <div class="team-card p-3 shadow-sm text-center">
-          <img src="{{ url_for('static', filename='images/team2.png') }}" alt="Team Member" class="img-fluid rounded-circle mb-3 team-img">
-          <h5 class="mb-1">Another Name</h5>
-          <p class="text-muted">Role / Title</p>
-          <p class="team-bio text-muted">Bio text here.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<script>
+// Scroll animations
+const faders = document.querySelectorAll('.about-heading, .about-subtext, .about-banner-img, .founder-img, .value-blob, .stat-box, .team-card, .partner-logo, .media-card, .ratio, .contact-involve-section');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('in-view'); } });
+},{ threshold: 0.2 });
+faders.forEach(fader => observer.observe(fader));
+</script>
 
-<!-- Partners / Media & Writing About Us -->
-<section class="partners-media-section py-5 bg-light">
-  <div class="container">
-    <div class="row mb-4 text-center">
-      <div class="col"><h2 class="section-heading">Partners & Media</h2></div>
-    </div>
-    <div class="row justify-content-center gy-4">
-      <!-- Partner logos -->
-      <div class="col-4 col-md-2 text-center">
-        <img src="{{ url_for('static', filename='images/partner1.png') }}" alt="Partner" class="img-fluid partner-logo">
-      </div>
-      <div class="col-4 col-md-2 text-center">
-        <img src="{{ url_for('static', filename='images/partner2.png') }}" alt="Partner" class="img-fluid partner-logo">
-      </div>
-      <div class="col-4 col-md-2 text-center">
-        <img src="{{ url_for('static', filename='images/partner3.png') }}" alt="Partner" class="img-fluid partner-logo">
-      </div>
-    </div>
-
-    <div class="row mt-5 gy-4">
-      <div class="col-md-4 text-center">
-        <div class="media-card p-3 shadow-sm">
-          <h6 class="media-title">The Guardian</h6>
-          <p class="text-muted small">Fighting fake medicines</p>
-        </div>
-      </div>
-      <div class="col-md-4 text-center">
-        <div class="media-card p-3 shadow-sm">
-          <h6 class="media-title">BBC News</h6>
-          <p class="text-muted small">Health tech revolution</p>
-        </div>
-      </div>
-      <div class="col-md-4 text-center">
-        <div class="media-card p-3 shadow-sm">
-          <h6 class="media-title">Chemistry World</h6>
-          <p class="text-muted small">Global health impact</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Embedded Video (again or a founder video) -->
-<section class="founder-video-section py-5">
-  <div class="container text-center">
-    <h2 class="section-heading">Meet the Vision</h2>
-    <div class="ratio ratio-16x9 mx-auto shadow rounded-3 overflow-hidden" style="max-width: 800px;">
-      <iframe src="https://samplelib.com/lib/preview/mp4/sample-20s.mp4" title="Founder Video" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
-
-<!-- Contact / Get Involved -->
-<section class="contact-involve-section py-5 bg-light">
-  <div class="container">
-    <div class="row gy-4">
-      <div class="col-md-6">
-        <h4>Contact Us</h4>
-        <form action="{{ url_for('contact') }}" method="post">
-          <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="Your name">
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" placeholder="you@example.com">
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
-            <textarea name="message" id="message" rows="4" class="form-control" placeholder="Your message..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Send</button>
-        </form>
-      </div>
-      <div class="col-md-6 text-center">
-        <h4>Get Involved</h4>
-        <p class="text-muted">Join our mission. Collaborate, partner, or contribute — together we improve access to safe medicines.</p>
-        <a href="#" class="btn btn-outline-primary">Help us now</a>
-      </div>
-    </div>
-  </div>
-</section>
 {% endblock %}

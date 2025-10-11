@@ -2,8 +2,54 @@
 {% block title %}Features — SyringeTracker{% endblock %}
 
 {% block content %}
-<!-- Hero / intro -->
-<section class="features-hero position-relative overflow-hidden">
+<style>
+/* ---------- General ---------- */
+body { font-family:'Poppins', sans-serif; color:#333; background:#f8f9fa; }
+h2,h3,h4,h5,h6 { font-weight:600; }
+a { text-decoration:none; }
+.btn-primary { background:#007BFF; border:none; padding:0.75rem 2rem; transition:all 0.3s; }
+.btn-primary:hover { background:#0056b3; transform:scale(1.05); }
+
+/* ---------- Hero ---------- */
+.features-hero { position:relative; height:50vh; display:flex; align-items:center; background: url('https://images.unsplash.com/photo-1588776814546-92b17b16f3e2?auto=format&fit=crop&w=1400&q=60') center/cover no-repeat; }
+.features-hero-overlay { position:absolute; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.5); }
+.features-heading { color:#fff; font-size:3rem; animation: fadeInDown 1s forwards; opacity:0; }
+.features-subtext { color:#fff; font-size:1.2rem; margin-top:1rem; animation: fadeInUp 1s 0.5s forwards; opacity:0; }
+.features-banner-img { max-width:100%; border-radius:12px; animation: fadeInRight 1s 0.7s forwards; opacity:0; }
+
+/* ---------- Feature Cards ---------- */
+.features-list .feature-box { background:#fff; border-radius:12px; padding:2rem; text-align:center; transition: transform 0.4s, box-shadow 0.4s; opacity:0; }
+.features-list .feature-box:hover { transform:translateY(-10px); box-shadow:0 20px 40px rgba(0,0,0,0.15); }
+.feature-title { margin-top:1rem; margin-bottom:0.5rem; }
+.feature-desc { color:#555; }
+
+/* ---------- Integration Section ---------- */
+.integration-section img { max-width:100%; border-radius:12px; animation: fadeInLeft 1s forwards; opacity:0; }
+.integration-section .section-title { font-size:2rem; margin-bottom:1rem; }
+.features-integration-list li { margin-bottom:0.5rem; }
+
+/* ---------- Use Cases ---------- */
+.usecase-card { background:#fff; border-radius:12px; padding:1.5rem; transition: transform 0.3s, box-shadow 0.3s; opacity:0; }
+.usecase-card:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,0,0,0.1); }
+
+/* ---------- CTA ---------- */
+.features-cta-section { padding:5rem 0; }
+.cta-heading { font-size:2.5rem; margin-bottom:1rem; animation: fadeInUp 1s forwards; opacity:0; }
+.cta-subtext { font-size:1.2rem; margin-bottom:2rem; animation: fadeInUp 1s 0.3s forwards; opacity:0; }
+
+/* ---------- Animations ---------- */
+@keyframes fadeInDown { 0%{opacity:0; transform:translateY(-20px);} 100%{opacity:1; transform:translateY(0);} }
+@keyframes fadeInUp { 0%{opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+@keyframes fadeInLeft { 0%{opacity:0; transform:translateX(-20px);} 100%{opacity:1; transform:translateX(0);} }
+@keyframes fadeInRight { 0%{opacity:0; transform:translateX(20px);} 100%{opacity:1; transform:translateX(0);} }
+.in-view { opacity:1; animation: fadeInUp 1s forwards; }
+
+/* ---------- Responsive ---------- */
+@media(max-width:992px){ .features-heading { font-size:2rem; text-align:center; } .features-subtext { text-align:center; } .features-banner-img { margin-top:2rem; } }
+</style>
+
+<!-- ---------- Hero ---------- -->
+<section class="features-hero">
   <div class="features-hero-overlay"></div>
   <div class="container py-5">
     <div class="row align-items-center">
@@ -12,120 +58,73 @@
         <p class="features-subtext">SyringeTracker gives you end-to-end control — from inventory to audit logs, alerts, access controls and analytics.</p>
       </div>
       <div class="col-lg-6 text-center">
-        <img src="{{ url_for('static', filename='images/features_banner.png') }}" alt="Features illustration" class="img-fluid features-banner-img">
+        <img src="https://plus.unsplash.com/premium_vector-1720649830326-aec72b8a447b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMHRyYWNrZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=300" alt="Features illustration" class="features-banner-img">
       </div>
     </div>
   </div>
 </section>
 
-<!-- Feature list / cards -->
-<section class="features-list py-5 bg-light">
-  <div class="container">
-    <div class="row gy-4">
-      <div class="col-md-6">
-        <div class="feature-box shadow-sm p-4">
-          <i class="fas fa-boxes fa-2x text-primary mb-3"></i>
-          <h5 class="feature-title">Inventory Dashboard</h5>
-          <p class="feature-desc">View all syringes (available, used, maintenance) in a consolidated dashboard with detailed filters.</p>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="feature-box shadow-sm p-4">
-          <i class="fas fa-barcode fa-2x text-success mb-3"></i>
-          <h5 class="feature-title">QR / Barcode Scanner</h5>
-          <p class="feature-desc">Scan syringes quickly to fetch their status, history, and validity checks.</p>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="feature-box shadow-sm p-4">
-          <i class="fas fa-history fa-2x text-info mb-3"></i>
-          <h5 class="feature-title">Full Audit Trail</h5>
-          <p class="feature-desc">Every status change is logged: who did it, when, and in what context. Ensure compliance & traceability.</p>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="feature-box shadow-sm p-4">
-          <i class="fas fa-bell fa-2x text-warning mb-3"></i>
-          <h5 class="feature-title">Alerts & Notifications</h5>
-          <p class="feature-desc">Get notified on low stock, expirations, or suspicious usage events, via email or in-app.</p>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="feature-box shadow-sm p-4">
-          <i class="fas fa-chart-line fa-2x text-danger mb-3"></i>
-          <h5 class="feature-title">Analytics & Reports</h5>
-          <p class="feature-desc">Customized reports & charts — usage by department, trend over time, usage forecasting.</p>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="feature-box shadow-sm p-4">
-          <i class="fas fa-user-shield fa-2x text-secondary mb-3"></i>
-          <h5 class="feature-title">Role-Based Access Control</h5>
-          <p class="feature-desc">Define roles (admin, technician, viewer) with specific read/write privileges.</p>
-        </div>
-      </div>
+<!-- ---------- Feature List ---------- -->
+<section class="features-list container py-5">
+  <div class="row gy-4">
+    <div class="col-md-6"><div class="feature-box"><i class="fas fa-boxes fa-2x text-primary mb-3"></i><h5>Inventory Dashboard</h5><p>View all syringes (available, used, maintenance) in a consolidated dashboard with detailed filters.</p></div></div>
+    <div class="col-md-6"><div class="feature-box"><i class="fas fa-barcode fa-2x text-success mb-3"></i><h5>QR / Barcode Scanner</h5><p>Scan syringes quickly to fetch their status, history, and validity checks.</p></div></div>
+    <div class="col-md-6"><div class="feature-box"><i class="fas fa-history fa-2x text-info mb-3"></i><h5>Full Audit Trail</h5><p>Every status change is logged: who did it, when, and in what context. Ensure compliance & traceability.</p></div></div>
+    <div class="col-md-6"><div class="feature-box"><i class="fas fa-bell fa-2x text-warning mb-3"></i><h5>Alerts & Notifications</h5><p>Get notified on low stock, expirations, or suspicious usage events, via email or in-app.</p></div></div>
+    <div class="col-md-6"><div class="feature-box"><i class="fas fa-chart-line fa-2x text-danger mb-3"></i><h5>Analytics & Reports</h5><p>Customized reports & charts — usage by department, trend over time, usage forecasting.</p></div></div>
+    <div class="col-md-6"><div class="feature-box"><i class="fas fa-user-shield fa-2x text-secondary mb-3"></i><h5>Role-Based Access Control</h5><p>Define roles (admin, technician, viewer) with specific read/write privileges.</p></div></div>
+  </div>
+</section>
+
+<!-- ---------- Integration & API ---------- -->
+<section class="integration-section container py-5">
+  <div class="row align-items-center gy-4">
+    <div class="col-lg-6">
+      <img src="https://plus.unsplash.com/premium_vector-1733879895438-52adc3706258?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBpJTIwaW50ZWdyYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="API / Integration" class="img-fluid">
+    </div>
+    <div class="col-lg-6">
+      <h3 class="section-title">API & Integration Ready</h3>
+      <p class="section-lead">Connect SyringeTracker with your systems — hospital ERP, lab management software, notification services, or inventory systems.</p>
+      <ul class="list-unstyled features-integration-list">
+        <li><i class="fas fa-check-circle text-primary me-2"></i> RESTful API endpoints for reading/writing data</li>
+        <li><i class="fas fa-check-circle text-primary me-2"></i> Webhooks for real-time event handling</li>
+        <li><i class="fas fa-check-circle text-primary me-2"></i> Data export in CSV / Excel formats</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- Integration & API section -->
-<section class="integration-section py-5">
-  <div class="container">
-    <div class="row align-items-center gy-4">
-      <div class="col-lg-6">
-        <img src="{{ url_for('static', filename='images/api_integration.png') }}" alt="API / Integration" class="img-fluid">
-      </div>
-      <div class="col-lg-6">
-        <h3 class="section-title">API & Integration Ready</h3>
-        <p class="section-lead">Connect SyringeTracker with your systems — hospital ERP, lab management software, notification services, or inventory systems.</p>
-        <ul class="list-unstyled features-integration-list">
-          <li><i class="fas fa-check-circle text-primary me-2"></i> RESTful API endpoints for reading/writing data</li>
-          <li><i class="fas fa-check-circle text-primary me-2"></i> Webhooks for real-time event handling</li>
-          <li><i class="fas fa-check-circle text-primary me-2"></i> Data export in CSV / Excel formats</li>
-        </ul>
-      </div>
+<!-- ---------- Use Cases ---------- -->
+<section class="usecases-section container py-5">
+  <div class="row mb-4 text-center">
+    <div class="col">
+      <h2 class="section-heading">Who Uses SyringeTracker?</h2>
+      <p class="text-muted">From hospitals to clinical research labs, SyringeTracker fits diverse settings.</p>
     </div>
+  </div>
+  <div class="row text-start gy-4">
+    <div class="col-md-4"><div class="usecase-card"><h5>Hospitals & Clinics</h5><p class="text-muted">Track syringe deployment in wards, schedule maintenance, and monitor usage per patient group.</p></div></div>
+    <div class="col-md-4"><div class="usecase-card"><h5>Diagnostic / Research Labs</h5><p class="text-muted">Maintain sterile inventory, log usage, integrate with lab systems, and generate compliance reports.</p></div></div>
+    <div class="col-md-4"><div class="usecase-card"><h5>Vaccination / Immunization Programs</h5><p class="text-muted">Manage large-scale syringe deployments, restocking, and audit logs by region or campaign.</p></div></div>
   </div>
 </section>
 
-<!-- Use Cases / Who it's for -->
-<section class="usecases-section py-5 bg-light">
-  <div class="container">
-    <div class="row mb-4 text-center">
-      <div class="col">
-        <h2 class="section-heading">Who Uses SyringeTracker?</h2>
-        <p class="section-subheading text-muted">From hospitals to clinical research labs, SyringeTracker fits diverse settings.</p>
-      </div>
-    </div>
-    <div class="row text-start gy-4">
-      <div class="col-md-4">
-        <div class="usecase-card shadow-sm p-4">
-          <h5>Hospitals & Clinics</h5>
-          <p class="text-muted">Track syringe deployment in wards, schedule maintenance, and monitor usage per patient group.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="usecase-card shadow-sm p-4">
-          <h5>Diagnostic / Research Labs</h5>
-          <p class="text-muted">Maintain sterile inventory, log usage, integrate with lab systems, and generate compliance reports.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="usecase-card shadow-sm p-4">
-          <h5>Vaccination / Immunization Programs</h5>
-          <p class="text-muted">Manage large-scale syringe deployments, restocking, and audit logs by region or campaign.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA section -->
-<section class="features-cta-section py-5 text-center">
+<!-- ---------- CTA ---------- -->
+<section class="features-cta-section text-center">
   <div class="container">
     <h2 class="cta-heading">Ready to track with confidence?</h2>
     <p class="cta-subtext text-muted">Join healthcare facilities that trust SyringeTracker for safe, auditable operations.</p>
     <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Start Now</a>
   </div>
 </section>
+
+<script>
+// Scroll animations
+const faders = document.querySelectorAll('.features-heading, .features-subtext, .features-banner-img, .feature-box, .integration-section img, .usecase-card, .cta-heading, .cta-subtext');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('in-view'); } });
+},{ threshold: 0.2 });
+faders.forEach(fader => observer.observe(fader));
+</script>
+
 {% endblock %}

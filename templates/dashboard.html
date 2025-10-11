@@ -1,51 +1,134 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h2>Syringe Dashboard</h2>
-  <a href="{{ url_for('add_syringe') }}" class="btn btn-success">+ Add Syringe</a>
+<style>
+/* Overall container */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.dashboard-header h2 { color: #007BFF; font-weight: 600; }
+.dashboard-header .btn-success {
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    transition: 0.3s;
+}
+.dashboard-header .btn-success:hover { transform: scale(1.05); }
+
+/* Card grid layout */
+.syringe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual syringe card */
+.syringe-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+.syringe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+}
+
+/* Animated status badges */
+.badge-status {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.badge-status.available { background: #28a745; }
+.badge-status.inuse { background: #ffc107; color: #212529; }
+.badge-status.used { background: #dc3545; }
+
+/* Pulse animation */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.badge-status.pulse { animation: pulse 1.5s infinite; }
+
+/* Card footer buttons */
+.card-footer-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+.card-footer-btns a {
+    text-decoration: none;
+    padding: 0.35rem 0.8rem;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-size: 0.85rem;
+}
+.card-footer-btns a.edit { background: #17a2b8; color: #fff; }
+.card-footer-btns a.edit:hover { background: #117a8b; }
+.card-footer-btns a.history { background: #6c757d; color: #fff; }
+.card-footer-btns a.history:hover { background: #495057; }
+
+/* Subtle floating animation for cards */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+.syringe-card:hover { animation: float 2s ease-in-out infinite; }
+</style>
+
+<div class="dashboard-header">
+    <h2>Syringe Dashboard</h2>
+    <a href="{{ url_for('add_syringe') }}" class="btn btn-success">+ Add Syringe</a>
 </div>
 
-<div class="card shadow">
-  <div class="card-body">
-    <table class="table table-hover">
-      <thead class="table-primary">
-        <tr>
-          <th>ID</th>
-          <th>Syringe ID</th>
-          <th>Status</th>
-          <th>Patient Info</th>
-          <th>Last Updated</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for syringe in syringes %}
-        <tr>
-          <td>{{ syringe.id }}</td>
-          <td><strong>{{ syringe.syringe_id }}</strong></td>
-          <td>
-            {% if syringe.status == "Available" %}
-              <span class="badge bg-success">{{ syringe.status }}</span>
-            {% elif syringe.status == "In Use" %}
-              <span class="badge bg-warning text-dark">{{ syringe.status }}</span>
-            {% else %}
-              <span class="badge bg-danger">{{ syringe.status }}</span>
-            {% endif %}
-          </td>
-          <td>{{ syringe.patient_info or "-" }}</td>
-          <td>{{ syringe.last_updated.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-          <td>
-            <a href="{{ url_for('syringe_detail', id=syringe.id) }}" class="btn btn-sm btn-info">Edit</a>
-            <a href="{{ url_for('syringe_history', id=syringe.id) }}" class="btn btn-sm btn-secondary">History</a>
-          </td>
-        </tr>
-        {% else %}
-        <tr>
-          <td colspan="6" class="text-center">No syringes found.</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+<div class="syringe-grid">
+    {% for syringe in syringes %}
+    <div class="syringe-card">
+        <h5>ID: <strong>{{ syringe.syringe_id }}</strong></h5>
+        <p>Patient: {{ syringe.patient_info or "N/A" }}</p>
+        <p>Last Updated: {{ syringe.last_updated.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+        <span class="badge-status
+            {% if syringe.status == 'Available' %}available pulse{% elif syringe.status == 'In Use' %}inuse pulse{% else %}used pulse{% endif %}">
+            {{ syringe.status }}
+        </span>
+        <div class="card-footer-btns">
+            <a href="{{ url_for('syringe_detail', id=syringe.id) }}" class="edit">Edit</a>
+            <a href="{{ url_for('syringe_history', id=syringe.id) }}" class="history">History</a>
+        </div>
+    </div>
+    {% else %}
+    <p class="text-center text-muted col-span-full">No syringes found.</p>
+    {% endfor %}
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js">
+// Optional: subtle background animation (floating circles)
+const body = document.body;
+const createCircle = () => {
+    const circle = document.createElement('div');
+    circle.style.width = `${Math.random()*30+10}px`;
+    circle.style.height = circle.style.width;
+    circle.style.background = 'rgba(0,123,255,0.1)';
+    circle.style.position = 'absolute';
+    circle.style.borderRadius = '50%';
+    circle.style.top = `${Math.random()*window.innerHeight}px`;
+    circle.style.left = `${Math.random()*window.innerWidth}px`;
+    circle.style.animation = `float ${2 + Math.random()*3}s ease-in-out infinite`;
+    body.appendChild(circle);
+    setTimeout(()=>circle.remove(), 10000);
+};
+setInterval(createCircle, 500);
+</script>
 {% endblock %}

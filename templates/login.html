@@ -1,9 +1,76 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="row justify-content-center">
+
+<!-- Add Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background: #e0f7fa;
+  overflow: hidden;
+}
+
+/* Particle background canvas */
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(120deg, #b3e5fc, #e1f5fe); /* Finland-inspired soft winter gradient */
+}
+
+/* Login card */
+.login-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 3rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+.login-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+.login-card h3 {
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #007BFF;
+}
+.form-control {
+  border-radius: 8px;
+  padding: 0.75rem;
+  border: 1px solid #00acc1;
+  transition: 0.3s;
+}
+.form-control:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+.btn-primary {
+  background: #007BFF;
+  border: none;
+  padding: 0.75rem;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.btn-primary:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+</style>
+
+<canvas id="bgCanvas"></canvas>
+
+<div class="d-flex justify-content-center align-items-center" style="height:100vh;">
   <div class="col-md-5">
-    <div class="card shadow p-4">
-      <h3 class="text-center mb-4">Login</h3>
+    <div class="login-card">
+      <h3>Login</h3>
       <form method="POST">
         <div class="mb-3">
           <label class="form-label">Username</label>
@@ -18,4 +85,89 @@
     </div>
   </div>
 </div>
+
+<script>
+// Ensure DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Set initial canvas size
+  const resizeCanvas = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  };
+  resizeCanvas();
+
+  class SyringeParticle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = 10 + Math.random() * 10; // Syringe size
+      this.speedX = -0.3 + Math.random() * 0.6; // Gentle horizontal drift
+      this.speedY = 0.5 + Math.random() * 1; // Slow downward fall like snow
+      this.opacity = 0.5 + Math.random() * 0.4; // Soft, translucent effect
+      this.rotation = Math.random() * Math.PI * 2; // Random rotation
+      this.rotSpeed = (Math.random() - 0.5) * 0.05; // Gentle rotation speed
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.globalAlpha = this.opacity;
+      ctx.fillStyle = '#007BFF'; // Blue syringe to match theme
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 1;
+
+      // Draw syringe shape (simplified: body + needle)
+      ctx.beginPath();
+      ctx.rect(-this.size / 4, -this.size, this.size / 2, this.size * 1.2); // Body
+      ctx.moveTo(0, -this.size);
+      ctx.lineTo(0, -this.size * 1.5); // Needle
+      ctx.fill();
+      ctx.stroke();
+      ctx.closePath();
+
+      ctx.restore();
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.rotation += this.rotSpeed;
+
+      // Wrap around canvas edges
+      if (this.x < 0) this.x = canvas.width;
+      if (this.x > canvas.width) this.x = 0;
+      if (this.y > canvas.height) this.y = 0; // Reset to top for snow-like effect
+      if (this.y < 0) this.y = canvas.height;
+
+      this.draw();
+    }
+  }
+
+  const particlesArray = [];
+  const particleCount = Math.min(50, Math.floor(window.innerWidth / 20)); // Fewer particles for performance
+  for (let i = 0; i < particleCount; i++) {
+    particlesArray.push(new SyringeParticle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particlesArray.forEach(p => p.update());
+    requestAnimationFrame(animate);
+  }
+
+  // Start animation
+  animate();
+
+  // Handle window resize
+  window.addEventListener('resize', resizeCanvas);
+
+  // Error handling
+  if (!canvas.getContext) {
+    console.warn('Canvas context not supported');
+  }
+});
+</script>
+
 {% endblock %}

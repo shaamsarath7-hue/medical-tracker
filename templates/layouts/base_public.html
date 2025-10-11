@@ -25,15 +25,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('landing') }}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('features') }}">Features</a></li>
-            <li class="nav-item"><a class "nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('landing') }}">HOME</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">WHO WE ARE</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('features') }}">WHAT WE DO</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('news') }}">NEWS</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('investors') }}">INVESTORS</a></li>
+            <!-- <li class="nav-item"><a class "nav-link" href="{{ url_for('contact') }}">Contact</a></li> -->
             {% if current_user.is_authenticated %}
-              <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
-              <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">DASHBOARD</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">LOGOUT</a></li>
             {% else %}
-              <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">LOGIN</a></li>
             {% endif %}
           </ul>
         </div>
