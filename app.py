@@ -59,13 +59,16 @@ def contact():
 
 @app.route('/news')
 def news():
-    # News will be fetched dynamically from DB or API in future
     return render_template('landing/news.html')
 
 @app.route('/investors')
 def investors():
-    # Investors will be fetched dynamically from DB in future
     return render_template('landing/investors.html')
+
+# ===== Privacy Policy =====
+@app.route('/privacy')
+def privacy():
+    return render_template('landing/privacy.html')
 
 # ===== Login / Logout =====
 @app.route('/login', methods=['GET', 'POST'])
