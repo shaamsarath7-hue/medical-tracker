@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}SyringeTracker{% endblock %}</title>
@@ -11,6 +12,16 @@
   <!-- Your custom CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
   {% block extra_css %}{% endblock %}
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17615437090"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-17615437090');
+</script>
 </head>
 <body>
   <!-- Header / Navigation -->
